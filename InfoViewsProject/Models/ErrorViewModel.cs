@@ -8,4 +8,5 @@ namespace InfoViewsProject.Models
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
+
 }

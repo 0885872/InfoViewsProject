@@ -5,13 +5,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using InfoViewsProject.Models;
+using Newtonsoft.Json;
 
 namespace InfoViewsProject.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public ActionResult Index()
         {
+            return View();
+        }
+
+        
+
+        [HttpPost]
+        public ActionResult Index(int i = 0)
+        {
+            Database db = new Database();
+            db.setReservations();
             return View();
         }
 

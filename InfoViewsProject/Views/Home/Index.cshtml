@@ -15,6 +15,7 @@
 
 
 
+
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -33,6 +34,19 @@
 
             today = yyyy + '-' + mm + '-' + dd;
 
+            @*var view = JSON.parse('@Html.Raw()');*@
+
+            $.ajax({
+                url: 'Controllers/HomeController/Index',
+                type: "GET",
+                success: function (tojson) {
+                    alert(json);
+                    //$( "#getReason" ).modal('hide');
+                    //$('#mydiv').hide();
+                    //$('body').removeClass('blockMask');//calendar.fullCalendar( 'refetchEvents');
+                    //$('#calendar').fullCalendar('refetchEvents');
+                }
+            });
 
             $('#calendar').fullCalendar({
                 eventStartEditable: false,
@@ -74,7 +88,7 @@
                         };
 
                         $.ajax({
-                            url: 'setEvent.php',
+                            url: 'HomeController.cs/Index',
                             data: { formatData: formatData },
                             type: "POST",
                             success: function (json) {
