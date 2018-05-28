@@ -45,7 +45,7 @@ namespace InfoViewsProject.Controllers
             }
         }
 
-        public void setReservations()
+        public void setReservations(List<string[]> reservationsToSave)
         {
             using (MySqlConnection conn = new MySqlConnection())
             {

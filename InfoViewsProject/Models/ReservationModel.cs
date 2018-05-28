@@ -13,12 +13,6 @@ namespace InfoViewsProject.Models
 
     public class ReservationModel
     {
-        [HttpGet]
-        public JsonResult Res()
-        {
-            Database db = new Database();
-            var result = db.getReservations();
-            return null;//Json(result);
-        }
+        public JsonResult ReservationResults { get; set; }
     }
 }

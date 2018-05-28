@@ -18,6 +18,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            eventArray = [];
 
             var today = new Date();
             var dd = today.getDate();
@@ -34,19 +35,26 @@
 
             today = yyyy + '-' + mm + '-' + dd;
 
-            @*var view = JSON.parse('@Html.Raw()');*@
+            var events = (@Html.Raw(ViewData["results"]));
+            x = 0;
+            while (events[x] != null) {
+                eventArray[x] = events[x];
+                x++;
 
-            $.ajax({
-                url: 'Controllers/HomeController/Index',
-                type: "GET",
-                success: function (tojson) {
-                    alert(json);
-                    //$( "#getReason" ).modal('hide');
-                    //$('#mydiv').hide();
-                    //$('body').removeClass('blockMask');//calendar.fullCalendar( 'refetchEvents');
-                    //$('#calendar').fullCalendar('refetchEvents');
-                }
-            });
+            }
+            alert(eventArray);
+
+            //$.ajax({
+            //    url: 'Home/Index',
+            //    type: "GET",
+            //    success: function (tojson) {
+            //        //alert(tojson);
+            //        //$( "#getReason" ).modal('hide');
+            //        //$('#mydiv').hide();
+            //        //$('body').removeClass('blockMask');//calendar.fullCalendar( 'refetchEvents');
+            //        //$('#calendar').fullCalendar('refetchEvents');
+            //    }
+            //});
 
             $('#calendar').fullCalendar({
                 eventStartEditable: false,
@@ -92,7 +100,7 @@
                             data: { formatData: formatData },
                             type: "POST",
                             success: function (json) {
-                                alert(json);
+                                alert("DONE!!!!");
                                 //$( "#getReason" ).modal('hide');
                                 //$('#mydiv').hide();
                                 //$('body').removeClass('blockMask');//calendar.fullCalendar( 'refetchEvents');
@@ -109,7 +117,7 @@
                 },
                 editable: true,
                 eventLimit: true,
-                events: '',
+                events: eventArray,
                 //     [
                 //     //id wordt reservation_id
                 //     //title wordt naam van reserverende persoon
