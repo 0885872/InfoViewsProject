@@ -101,22 +101,7 @@
                             }
 
                         });
-
-                        @*$.ajax({
-                            url: '@Url.Action("reservationsToSave", "HomeController")',
-                            data: { formatData: formatData },
-                            type: "POST",
-                            success: function (json) {
-                                alert("DONE!!!!");
-                                //$( "#getReason" ).modal('hide');
-                                //$('#mydiv').hide();
-                                //$('body').removeClass('blockMask');//calendar.fullCalendar( 'refetchEvents');
-                                //$('#calendar').fullCalendar('refetchEvents');
-                            }
-                        });*@
-
-
-
+                        
                         $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
                     }
                     $('#calendar').fullCalendar('unselect');
