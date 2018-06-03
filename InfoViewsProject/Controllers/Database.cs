@@ -47,16 +47,16 @@ namespace InfoViewsProject.Controllers
             }
         }
 
-        public void setReservations(List<string[]> reservationsToSave)
+        public void setReservations(ReservationModel reservation)
         {
             using (MySqlConnection conn = new MySqlConnection())
             {
-
+                DateTime localDate = DateTime.Now;
                 conn.ConnectionString = "Server=drakonit.nl;Database=timbrrf252_roomreserve;Uid=timbrrf252_ictlab;Password=ictlabhro;SslMode=none";
                 conn.Open();
-                //String sql = "INSERT INTO reservations (group_id,user_name, user_mail, user_password, user_role, active) VALUES (" + groupid + ",'" + userModel.Name + "','" + userModel.Mail + "','" + userModel.Password + "', 'user', 0);";
-                //MySqlCommand command = new MySqlCommand(sql, conn);
-                //command.ExecuteNonQuery();
+                string sql = "INSERT INTO reservations (room_id,start,end,reservation_date,valid) VALUES (1,'" + reservation.start + "','" + reservation.end + "','" + localDate + "', 0);";
+                MySqlCommand command = new MySqlCommand(sql, conn);
+                command.ExecuteNonQuery();
                 conn.Close();
             }
         }

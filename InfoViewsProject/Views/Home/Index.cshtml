@@ -72,7 +72,6 @@
                 select: function (start, end) {
                     var title = prompt('Event Title:');
                     var eventData;
-                    var formatData;
                     if (title) {
                         eventData = {
                             title: title,
@@ -82,14 +81,29 @@
                         var startFormat = moment(start).format('YYYY/MM/DD HH:mm');
                         var endFormat = moment(end).format('YYYY/MM/DD HH:mm');
 
-                        formatData = {
-                            title: title,
-                            start: startFormat,
-                            end: endFormat
-                        };
+                        var reservation = new Object();
+                        reservation.title = title;
+                        reservation.start = startFormat;
+                        reservation.end = endFormat;
+                        
 
                         $.ajax({
-                            url: '/HomeController/Index',
+                            url: '/Home/SetReservation',
+                            type: 'POST',
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(reservation),
+                            success: function (data) {
+                                alert(data);
+                            },
+                            failure: function (errMsg) {
+                                alert(errMsg);
+                            }
+
+                        });
+
+                        @*$.ajax({
+                            url: '@Url.Action("reservationsToSave", "HomeController")',
                             data: { formatData: formatData },
                             type: "POST",
                             success: function (json) {
@@ -99,7 +113,7 @@
                                 //$('body').removeClass('blockMask');//calendar.fullCalendar( 'refetchEvents');
                                 //$('#calendar').fullCalendar('refetchEvents');
                             }
-                        });
+                        });*@
 
 
 

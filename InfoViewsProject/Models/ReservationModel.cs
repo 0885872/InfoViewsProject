@@ -13,6 +13,8 @@ namespace InfoViewsProject.Models
 
     public class ReservationModel
     {
-        public JsonResult ReservationResults { get; set; }
+        public string title { get; set; }
+        public string start { get; set; }
+        public string end { get; set; }
     }
 }

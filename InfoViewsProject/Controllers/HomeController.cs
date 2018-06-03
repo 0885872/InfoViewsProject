@@ -24,11 +24,17 @@ namespace InfoViewsProject.Controllers
 
         //Reservaties posten
         [HttpPost]
-        public ActionResult MyAction(List<string[]> reservationsToSave)
+        public void SetReservation([FromBody]ReservationModel reservation)
         {
+            ReservationModel reservations = new ReservationModel
+            {
+                title = reservation.title,
+                start = reservation.start,
+                end = reservation.end
+
+            };
             Database db = new Database();
-            db.setReservations(reservationsToSave);
-            return View();
+            db.setReservations(reservations);
         }
 
         public IActionResult Error()
