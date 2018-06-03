@@ -40,21 +40,14 @@
             while (events[x] != null) {
                 eventArray[x] = events[x];
                 x++;
-
             }
-            alert(eventArray);
 
-            //$.ajax({
-            //    url: 'Home/Index',
-            //    type: "GET",
-            //    success: function (tojson) {
-            //        //alert(tojson);
-            //        //$( "#getReason" ).modal('hide');
-            //        //$('#mydiv').hide();
-            //        //$('body').removeClass('blockMask');//calendar.fullCalendar( 'refetchEvents');
-            //        //$('#calendar').fullCalendar('refetchEvents');
-            //    }
-            //});
+            var collectionString = "["
+            var events = new Array();
+            for (var i = 0, len = eventArray.length; i < len; i++) {
+                events[i] = { 'id': eventArray[i][0], 'title': eventArray[i][1], 'start': eventArray[i][2], 'end': eventArray[i][3] };
+                }
+
 
             $('#calendar').fullCalendar({
                 eventStartEditable: false,
@@ -96,7 +89,7 @@
                         };
 
                         $.ajax({
-                            url: 'HomeController.cs/Index',
+                            url: '/HomeController/Index',
                             data: { formatData: formatData },
                             type: "POST",
                             success: function (json) {
@@ -117,69 +110,9 @@
                 },
                 editable: true,
                 eventLimit: true,
-                events: eventArray,
-                //     [
-                //     //id wordt reservation_id
-                //     //title wordt naam van reserverende persoon
-                //     //start wordt datum/tijd '2018-03-09T16:00:00'
-                //     //end wordt datum/tijd '2018-03-09T16:00:00'
-                //     //url wordt een website link
-                //   {
-                //     title: 'All Day Event',
-                //     start: '2018-03-01'
-                //   },
-                //   {
-                //     title: 'Long Event',
-                //     start: '2018-03-07',
-                //     end: '2018-03-10'
-                //   },
-                //   {
-                //     id: 999,
-                //     title: 'Repeating Event',
-                //     start: '2018-03-09T16:00:00'
-                //   },
-                //   {
-                //     id: 999,
-                //     title: 'Repeating Event',
-                //     start: '2018-03-16T16:00:00'
-                //   },
-                //   {
-                //     title: 'Conference',
-                //     start: '2018-03-11',
-                //     end: '2018-03-13'
-                //   },
-                //   {
-                //     title: 'Meeting',
-                //     start: '2018-03-12T10:30:00',
-                //     end: '2018-03-12T12:30:00'
-                //   },
-                //   {
-                //     title: 'Lunch',
-                //     start: '2018-03-12T12:00:00'
-                //   },
-                //   {
-                //     title: 'Meeting',
-                //     start: '2018-03-12T14:30:00'
-                //   },
-                //   {
-                //     title: 'Happy Hour',
-                //     start: '2018-03-12T17:30:00'
-                //   },
-                //   {
-                //     title: 'Dinner',
-                //     start: '2018-03-12T20:00:00'
-                //   },
-                //   {
-                //     title: 'Birthday Party',
-                //     start: '2018-03-13T07:00:00'
-                //   },
-                //   {
-                //     title: 'Click for Google',
-                //     url: 'http://google.com/',
-                //     start: '2018-03-28'
-                //   }
-                // ]
+                events: events,
             });
+            
 
         });
     </script>

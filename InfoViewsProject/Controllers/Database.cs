@@ -33,9 +33,11 @@ namespace InfoViewsProject.Controllers
                             string[] res = new string[5];
                             res[0] = reader["reservation_id"].ToString();
                             res[1] = reader["room_id"].ToString();
-                            res[2] = reader["start"].ToString();
+                            res[2] = reader["start"].ToString(); 
                             res[3] = reader["end"].ToString();
                             res[4] = reader["valid"].ToString();
+                            res[2] = Convert.ToDateTime(res[2]).ToString("yyyy/MM/dd HH:mm");
+                            res[3] = Convert.ToDateTime(res[3]).ToString("yyyy/MM/dd HH:mm");
                             reservations.Add(res);
                         }
                     }

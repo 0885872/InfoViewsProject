@@ -24,7 +24,7 @@ namespace InfoViewsProject.Controllers
 
         //Reservaties posten
         [HttpPost]
-        public ActionResult GetEvent(List<string[]> reservationsToSave)
+        public ActionResult MyAction(List<string[]> reservationsToSave)
         {
             Database db = new Database();
             db.setReservations(reservationsToSave);
