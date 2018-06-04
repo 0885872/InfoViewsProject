@@ -24,6 +24,10 @@
             var dd = today.getDate();
             var mm = today.getMonth() + 1; //January is 0!
             var yyyy = today.getFullYear();
+            var hours = today.getHours();
+            var minutes = today.getMinutes();
+            var seconds = today.getSeconds
+
 
             if (dd < 10) {
                 dd = '0' + dd
@@ -72,45 +76,56 @@
                 selectable: true,
                 selectHelper: true,
                 select: function (start, end) {
-                    var confirmed = confirm("Do you really want to book this room from " + moment(start).format('YYYY/MM/DD HH:mm') + " till " + moment(end).format('YYYY/MM/DD HH:mm') + "?");
-                    if (confirmed) {
-                        var title = "userId";
-                        var eventData;
-                        if (title) {
-                            eventData = {
-                                title: title,
-                                start: start,
-                                end: end
-                            };
-                            var startFormat = moment(start).format('YYYY/MM/DD HH:mm');
-                            var endFormat = moment(end).format('YYYY/MM/DD HH:mm');
+                    startdate = start.clone();
+                    enddate = end.clone();
+                    isWeekend = false;
 
-                            var reservation = new Object();
-                            reservation.title = title;
-                            reservation.start = startFormat;
-                            reservation.end = endFormat;
-
-
-                            $.ajax({
-                                url: '/Home/SetReservation',
-                                type: 'POST',
-                                dataType: "json",
-                                contentType: "application/json; charset=utf-8",
-                                data: JSON.stringify(reservation),
-                                success: function (data) {
-                                    alert(data);
-                                },
-                                failure: function (errMsg) {
-                                    alert(errMsg);
-                                }
-
-                            });
-
-                            $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                        }
+                    if (startdate.isoWeekday() == 6 || startdate.isoWeekday() == 7 || enddate.isoWeekday() == 6 || enddate.isoWeekday() == 7) {
+                        isWeekend = true;
+                        alert("You can not book a room on Saturday or Sunday.")
                         $('#calendar').fullCalendar('unselect');
                     }
-                    
+                    if (isWeekend == false) {
+                        var confirmed = confirm("Do you really want to book this room from " + moment(start).format('YYYY/MM/DD HH:mm') + " till " + moment(end).format('YYYY/MM/DD HH:mm') + "?");
+                        if (confirmed) {
+                            var title = "userId";
+                            var eventData;
+                            if (title) {
+                                eventData = {
+                                    title: title,
+                                    start: start,
+                                    end: end
+                                };
+                                var startFormat = moment(start).format('YYYY/MM/DD HH:mm');
+                                var endFormat = moment(end).format('YYYY/MM/DD HH:mm');
+
+                                var reservation = new Object();
+                                reservation.title = title;
+                                reservation.start = startFormat;
+                                reservation.end = endFormat;
+
+
+                                $.ajax({
+                                    url: '/Home/SetReservation',
+                                    type: 'POST',
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+                                    data: JSON.stringify(reservation),
+                                    success: function (data) {
+                                        alert(data);
+                                    },
+                                    failure: function (errMsg) {
+                                        alert(errMsg);
+                                    }
+
+                                });
+
+                                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                            }
+                            $('#calendar').fullCalendar('unselect');
+                        }
+
+                    }                  
 
                 },
                 editable: true,
