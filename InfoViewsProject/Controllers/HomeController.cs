@@ -24,7 +24,7 @@ namespace InfoViewsProject.Controllers
 
         //Reservaties posten
         [HttpPost]
-        public void SetReservation([FromBody]ReservationModel reservation)
+        public ActionResult SetReservation([FromBody]ReservationModel reservation)
         {
             ReservationModel reservations = new ReservationModel
             {
@@ -35,6 +35,7 @@ namespace InfoViewsProject.Controllers
             };
             Database db = new Database();
             db.setReservations(reservations);
+            return View("Index");
         }
 
         public IActionResult Error()
